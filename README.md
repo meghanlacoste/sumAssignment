@@ -41,6 +41,7 @@ public class Main {
         //
 
         int bound = 0;
+        int row = 0;
 
         try {
             // --------------------------------
@@ -73,12 +74,13 @@ public class Main {
 
                         if (scanUserFile.hasNext()) {
                             someInteger = scanUserFile.nextInt();
-                            
+                            if (indx>5) {
+                                indx = 0;
+                                row +=1;
+                                arr_[indx][row] = someInteger;
+                            }
 
-                            arr_[indx][indx/bound] = someInteger;
-
-
-                            System.out.print("  " + someInteger);
+                            System.out.print(" " + someInteger);
 
                         } else {
                             // ---------------------------------------------
@@ -114,3 +116,34 @@ public class Main {
             System.out.println(e);
             e.printStackTrace();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }// end main method
+}// end main class
