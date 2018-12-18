@@ -19,6 +19,7 @@ public class Main {
 
         String userFileName = "matrix.txt";
         int someInteger = 0;
+        int arr_[][] = null;
 
 
         //display sum, starting position and sub array to screen
@@ -57,11 +58,11 @@ public class Main {
             // Reads in values from the file in a for loop
             //
 
-            for(int i=0; i < MAX; i++) {
-
+            for (int i = 0; i < MAX; i++) {
                 if (i == 0 && scanUserFile.hasNextInt()) {
                     bound = scanUserFile.nextInt();
-                    int arr_[][] = new int[bound][bound];
+
+                    arr_ = new int[bound][bound];
 
 
                     for(int indx =0; indx < MAX; indx ++) {
@@ -104,6 +105,14 @@ public class Main {
 
 
             System.out.println();
+            for (int i = 0; i< bound; i++) {
+                for (int j= 0; j < bound; j++) {
+                    System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
+                    System.out.println();
+                }
+
+            }
+
 
             // ---------------------------------------------
             // If the file cannot be found then an exception (error) is generated (thrown) that we have to
