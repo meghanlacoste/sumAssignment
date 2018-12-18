@@ -8,7 +8,7 @@ public class Main {
     private static final int MAX= 100;
 
     public static void main(String[] args) {
-	// write your code here
+        // write your code here
         // find the smallest square subarray with a su as close to " " as possible
         //the smallest sub array to be considered is 2x2
         // File Format (each line)
@@ -25,16 +25,16 @@ public class Main {
         //display sum, starting position and sub array to screen
 
         //System.out.println("");
-       // System.out.println("Please type in the file name\n");
+        // System.out.println("Please type in the file name\n");
 
         // create a variable s of type scanner to process input from "System.in"
-       // Scanner scanSystemIn = new Scanner(System.in);
+        // Scanner scanSystemIn = new Scanner(System.in);
 
         // Use the Scanner "s" to get the "next" input from "System.in"
-       // userFileName = scanSystemIn.next();
+        // userFileName = scanSystemIn.next();
 
         // Display the user input now stored in "userInput"
-      //  System.out.println("\nThe user input: " + userFileName);
+        //  System.out.println("\nThe user input: " + userFileName);
 
 
         // ---------------------------------------------
@@ -42,7 +42,7 @@ public class Main {
         //
 
         int bound = 0;
-        int row = 0;
+        //int row = 0;
 
         try {
             // --------------------------------
@@ -59,31 +59,26 @@ public class Main {
             //
 
             for (int i = 0; i < MAX; i++) {
-                if (i == 0 && scanUserFile.hasNextInt()) {
-                    bound = scanUserFile.nextInt();
+                if (scanUserFile.hasNextInt()) {
+                    if (i == 0) {
+                        bound = scanUserFile.nextInt();
 
-                    arr_ = new int[bound][bound];
+                        arr_ = new int[bound][bound];
+
+                    } else {
+
+                        for (int row = 0; row < bound; row++) {
+
+                            for (int column = i - 1; column < bound; column++)
+
+                                arr_[row][column] = scanUserFile.nextInt();
+                        }
+                    }
+
+                }
 
 
-                    for(int indx =0; indx < MAX; indx ++) {
-
-
-                        // ---------------------------------------------
-                        // The scanner checks if there is another integer and prints it
-                        // if there is
-                        //
-
-                        if (scanUserFile.hasNext()) {
-                            someInteger = scanUserFile.nextInt();
-                            if (indx>5) {
-                                indx = 0;
-                                row +=1;
-                                arr_[indx][row] = someInteger;
-                            }
-
-                            System.out.print(" " + someInteger);
-
-                        } else {
+                         else {
                             // ---------------------------------------------
                             // The scanner detected no other integers
                             // - closes the scanner for the file
@@ -98,8 +93,6 @@ public class Main {
                     }
 
 
-
-                } }
 
 
 
@@ -125,21 +118,6 @@ public class Main {
             System.out.println(e);
             e.printStackTrace();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
