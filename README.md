@@ -7,6 +7,23 @@ public class Main {
 
     private static final int MAX= 100;
 
+
+
+    public static int getClosestValue(int[][] numbers) {
+        int minValue = Math.abs(numbers[0][0]);
+
+        for (int j = 0; j < numbers.length; j++) {
+
+            for (int i = 0; i < numbers[j].length; i++) {
+
+                if ( Math.abs(numbers[j][i]) < minValue ) {
+                    minValue = numbers[j][i];
+                }
+            }
+        }
+        return minValue ;
+    }
+
     public static void main(String[] args) {
         // write your code here
         // find the smallest square subarray with a su as close to " " as possible
@@ -41,7 +58,9 @@ public class Main {
         // This is where we "try" to process the file
         //
 
-        int bound = 0;
+
+        // let n represent the dimensions of the square matrix (n x n)
+        int n = 0;
         //int row = 0;
 
         try {
@@ -61,15 +80,16 @@ public class Main {
             for (int i = 0; i < MAX; i++) {
                 if (scanUserFile.hasNextInt()) {
                     if (i == 0) {
-                        bound = scanUserFile.nextInt();
 
-                        arr_ = new int[bound][bound];
+                        n = scanUserFile.nextInt();
+
+                        arr_ = new int[n][n];
 
                     } else {
 
-                        for (int row = 0; row < bound; row++) {
+                        for (int row = 0; row < n; row++) {
 
-                            for (int column = i - 1; column < bound; column++)
+                            for (int column = i - 1; column < n; column++)
 
                                 arr_[row][column] = scanUserFile.nextInt();
                         }
@@ -78,33 +98,44 @@ public class Main {
                 }
 
 
-                         else {
-                            // ---------------------------------------------
-                            // The scanner detected no other integers
-                            // - closes the scanner for the file
-                            // - breaks out of the for loop
-                            //
-                            System.out.print("\n\nDataFileFILE has been completely READ");
-                            scanUserFile.close();
+                else {
+                    // ---------------------------------------------
+                    // The scanner detected no other integers
+                    // - closes the scanner for the file
+                    // - breaks out of the for loop
+                    //
+                    System.out.print("\n\nDataFileFILE has been completely READ");
+                    scanUserFile.close();
 
-                            // A break statement allows us to exit the loop before we have reach the end
-                            break;
+                    // A break statement allows us to exit the loop before we have reach the end
+                    break;
+                    
                         }
                     }
 
 
 
+            System.out.println("\n==================================================================================\n");
+
+            System.out.println("Original Matrix");
 
 
+            int itemsOnLine = 0;
+            for (int i = 0; i< n; i++) {
 
-            System.out.println();
-            for (int i = 0; i< bound; i++) {
-                for (int j= 0; j < bound; j++) {
-                    System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
-                    System.out.println();
+                for (int j= 0; j < n; j++) {
+                    itemsOnLine++;
+                    // System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
+                    System.out.print(arr_[i][j] + " ");
+                    if (itemsOnLine==5){
+                        System.out.println();
+                        itemsOnLine =0;
+                    }
                 }
 
             }
+
+
 
 
             // ---------------------------------------------
@@ -119,6 +150,144 @@ public class Main {
             e.printStackTrace();
         }
 
+/*
+ int sum =0;
+        int arr_sum [][]= new int [n-1][n-1];
+
+
+        // creates new array that:
+        //stores the closest sum to zero in the first column [n][0]
+        // stores the index row of the starting position in [n][1]
+        //stores the index column of the starting position in [n][2]
+        // stores the dimensions of the submatrix in [n][3]
+
+        System.out.println("==================================================================================\n");
+
+        int arr_closest [][] = new int [n][3];
+
+            for (int r =0 ; r < n-1; r ++){
+
+            for (int c = 0; c < n-1; c ++){
+
+                sum = arr_[r][c] + arr_[r][c+1] + arr_[r+1][c] + arr_[r+1][c+1];
+
+                arr_sum [r][c] = sum;
+
+
+            }
+
+            }
+
+       int itemsOnLine = 0;
+        for (int i = 0; i< (n-1); i++) {
+
+            for (int j= 0; j < (n-1); j++) {
+                itemsOnLine++;
+
+                // System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
+
+                System.out.print(arr_sum[i][j] + " ");
+
+                if (itemsOnLine==n-1){
+
+                    System.out.println();
+
+                    itemsOnLine =0;
+                }
+            }
+
+        }
+
+        System.out.println( " closest value to zero is: " + getClosestValue(arr_sum));
+
+        for (int i = 0; i< (n-1); i++) {
+
+            for (int j = 0; j < (n - 1); j++) {
+
+                if (arr_sum[i][j] == getClosestValue(arr_sum)) {
+
+                    System.out.println("i: " + i + " j:" + j);
+                    System.out.println(arr_[i][j] + " " + arr_[i][j+1] + " " + arr_[i+1][j] + " " + arr_[i+1][j+1]);
+                    //arr_closest
+
+
+                }
+            }
+        }
+
+ */
+
+        System.out.println("\n==================================================================================\n");
+
+
+        //for (int sideLength = 5; sideLength >= 2; sideLength --){
+            int sum =0;
+            int arr_sum [][]= new int [n-1][n-1];
+
+            int arr_closest [][] = new int [n][1];
+
+        for (int side = n-1; side >= 2; side --) {
+
+            for (int r = 0 ; r <= n-side; r ++){
+
+                for (int c = 0; c <= n-side; c ++){
+
+                        sum = arr_[r][c];
+
+
+                        for (int m = 1; m < side ; m++ ){
+
+                            sum += arr_[r][c+m] + arr_[r+m][c] + arr_[r+m][c+m];
+                            System.out.println("m " + m + " sum " + sum);
+
+                        }
+
+                    System.out.println("side length " + side + " r:" + r + " c:"+  c + " sum:" + sum);
+
+                    }
+
+
+                }
+
+            }
+
+            int itemsOnLine = 0;
+            for (int i = 0; i< (n-1); i++) {
+
+                for (int j= 0; j < (n-1); j++) {
+                    itemsOnLine++;
+
+                    // System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
+
+                    System.out.print(arr_sum[i][j] + " ");
+
+                    if (itemsOnLine==n-1){
+
+                        System.out.println();
+
+                        itemsOnLine =0;
+                    }
+                }
+
+            }
+
+            System.out.println( " closest value to zero is: " + getClosestValue(arr_sum));
+
+            for (int i = 0; i< (n-1); i++) {
+
+                for (int j = 0; j < (n - 1); j++) {
+
+                    if (arr_sum[i][j] == getClosestValue(arr_sum)) {
+
+                        System.out.println("i: " + i + " j:" + j);
+                        System.out.println(arr_[i][j] + " " + arr_[i][j+1] + " " + arr_[i+1][j] + " " + arr_[i+1][j+1]);
+                        arr_closest[1][0] = i;
+                        arr_closest[1][1] = j;
+
+
+                    }
+                }
+            }
 
 
 
@@ -126,11 +295,5 @@ public class Main {
 
 
 
-
-
-
-
-
-
-    }// end main method
-}// end main class
+        }// end main method
+        }// end main class
