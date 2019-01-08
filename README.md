@@ -232,17 +232,26 @@ public class Main {
 
                 for (int c = 0; c <= n-side; c ++){
 
-                        sum = arr_[r][c];
+                        //sum =  arr_[r][c];
+                    sum =0;
 
+                        for (int m = 0; m < side ; m++ ){
 
-                        for (int m = 1; m < side ; m++ ){
+                            for (int x = 0; x < side; x ++){
 
-                            sum += arr_[r][c+m] + arr_[r+m][c] + arr_[r+m][c+m];
-                            System.out.println("m " + m + " sum " + sum);
+                                System.out.println(" m:" + m + " x: " + x + " " +  arr_[r+m][c+x] );
+                                sum += arr_[r+m][c+x];
+
+                            }
+                            System.out.println( "sum " + sum);
+                           // sum += arr_[r][c+m] + arr_[r+m][c] + arr_[r+m][c+m];
+                           // System.out.println("m " + m + " sum " + sum);
 
                         }
 
                     System.out.println("side length " + side + " r:" + r + " c:"+  c + " sum:" + sum);
+
+                    arr_sum [r][c] = sum;
 
                     }
 
@@ -251,7 +260,24 @@ public class Main {
 
             }
 
-            int itemsOnLine = 0;
+        System.out.println( " closest value to zero is: " + getClosestValue(arr_sum));
+
+        for (int i = 0; i < n-1; i++){
+           for (int j = 0; j < n-1; j++){
+
+               if (arr_sum[i][j] == getClosestValue(arr_sum)){
+
+                   //Sum: 1, Position: [0:0] Sub-Array: [ 42 32 -73 0 ]
+                   System.out.print( "Sum :" + getClosestValue(arr_sum) + "  Position [" + i + " : " + j + "]" );
+               }
+
+            }
+        }
+
+
+            /*
+
+              int itemsOnLine = 0;
             for (int i = 0; i< (n-1); i++) {
 
                 for (int j= 0; j < (n-1); j++) {
@@ -281,13 +307,16 @@ public class Main {
 
                         System.out.println("i: " + i + " j:" + j);
                         System.out.println(arr_[i][j] + " " + arr_[i][j+1] + " " + arr_[i+1][j] + " " + arr_[i+1][j+1]);
-                        arr_closest[1][0] = i;
-                        arr_closest[1][1] = j;
+                       // arr_closest[1][0] = i;
+                     //   arr_closest[1][1] = j;
 
 
                     }
                 }
             }
+             */
+
+
 
 
 
