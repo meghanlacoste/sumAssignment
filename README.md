@@ -165,56 +165,6 @@ public class Main {
 
         int arr_closest [][] = new int [n][3];
 
-            for (int r =0 ; r < n-1; r ++){
-
-            for (int c = 0; c < n-1; c ++){
-
-                sum = arr_[r][c] + arr_[r][c+1] + arr_[r+1][c] + arr_[r+1][c+1];
-
-                arr_sum [r][c] = sum;
-
-
-            }
-
-            }
-
-       int itemsOnLine = 0;
-        for (int i = 0; i< (n-1); i++) {
-
-            for (int j= 0; j < (n-1); j++) {
-                itemsOnLine++;
-
-                // System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
-
-                System.out.print(arr_sum[i][j] + " ");
-
-                if (itemsOnLine==n-1){
-
-                    System.out.println();
-
-                    itemsOnLine =0;
-                }
-            }
-
-        }
-
-        System.out.println( " closest value to zero is: " + getClosestValue(arr_sum));
-
-        for (int i = 0; i< (n-1); i++) {
-
-            for (int j = 0; j < (n - 1); j++) {
-
-                if (arr_sum[i][j] == getClosestValue(arr_sum)) {
-
-                    System.out.println("i: " + i + " j:" + j);
-                    System.out.println(arr_[i][j] + " " + arr_[i][j+1] + " " + arr_[i+1][j] + " " + arr_[i+1][j+1]);
-                    //arr_closest
-
-
-                }
-            }
-        }
-
  */
 
         System.out.println("\n==================================================================================\n");
@@ -222,6 +172,7 @@ public class Main {
 
         //for (int sideLength = 5; sideLength >= 2; sideLength --){
             int sum =0;
+            int counter=0;
             int arr_sum [][]= new int [n-1][n-1];
 
             int arr_closest [][] = new int [n][1];
@@ -239,19 +190,20 @@ public class Main {
 
                             for (int x = 0; x < side; x ++){
 
-                                System.out.println(" m:" + m + " x: " + x + " " +  arr_[r+m][c+x] );
+                             //   System.out.println(" m:" + m + " x: " + x + " " +  arr_[r+m][c+x] );
                                 sum += arr_[r+m][c+x];
 
                             }
-                            System.out.println( "sum " + sum);
+                          //  System.out.println( "sum " + sum);
                            // sum += arr_[r][c+m] + arr_[r+m][c] + arr_[r+m][c+m];
                            // System.out.println("m " + m + " sum " + sum);
 
                         }
 
-                    System.out.println("side length " + side + " r:" + r + " c:"+  c + " sum:" + sum);
+                    //System.out.println("side length " + side + " r:" + r + " c:"+  c + " sum:" + sum);
 
-                    arr_sum [r][c] = sum;
+                    arr_sum[r][c] = sum;
+
 
                     }
 
@@ -260,7 +212,6 @@ public class Main {
 
             }
 
-        System.out.println( " closest value to zero is: " + getClosestValue(arr_sum));
 
         for (int i = 0; i < n-1; i++){
            for (int j = 0; j < n-1; j++){
@@ -268,58 +219,47 @@ public class Main {
                if (arr_sum[i][j] == getClosestValue(arr_sum)){
 
                    //Sum: 1, Position: [0:0] Sub-Array: [ 42 32 -73 0 ]
-                   System.out.print( "Sum :" + getClosestValue(arr_sum) + "  Position [" + i + " : " + j + "]" );
-               }
+                   System.out.print( "Sum :" + getClosestValue(arr_sum) + "  Position [" + i + " : " + j + "] Sub-Array: [ " );
+
+                   for (int side = n-1; side >= 2; side --) {
+
+                            sum = 0;
+
+                               for (int m = 0; m < side; m++) {
+
+                                   for (int x = 0; x < side; x++) {
+
+                                       //   System.out.println(" m:" + m + " x: " + x + " " +  arr_[r+m][c+x] );
+                                       sum += arr_[i + m][j + x];
+
+                                   }
+
+                                   if (sum == getClosestValue(arr_sum)) {
+                                       for (int t = 0; t < side; t++) {
+
+                                           for (int s = 0; s < side; s++) {
+
+                                               //   System.out.println(" m:" + m + " x: " + x + " " +  arr_[r+m][c+x] );
+                                               System.out.print(arr_[i + t][j + s] + " ");
+
+                                           }
+                                       }
+                                       break;
+                                   }
+                               }
+                           }
+
+                           System.out.print("]");
+                       }
+                   }
 
             }
-        }
 
-
-            /*
-
-              int itemsOnLine = 0;
-            for (int i = 0; i< (n-1); i++) {
-
-                for (int j= 0; j < (n-1); j++) {
-                    itemsOnLine++;
-
-                    // System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
-
-                    System.out.print(arr_sum[i][j] + " ");
-
-                    if (itemsOnLine==n-1){
-
-                        System.out.println();
-
-                        itemsOnLine =0;
-                    }
-                }
-
-            }
-
-            System.out.println( " closest value to zero is: " + getClosestValue(arr_sum));
-
-            for (int i = 0; i< (n-1); i++) {
-
-                for (int j = 0; j < (n - 1); j++) {
-
-                    if (arr_sum[i][j] == getClosestValue(arr_sum)) {
-
-                        System.out.println("i: " + i + " j:" + j);
-                        System.out.println(arr_[i][j] + " " + arr_[i][j+1] + " " + arr_[i+1][j] + " " + arr_[i+1][j+1]);
-                       // arr_closest[1][0] = i;
-                     //   arr_closest[1][1] = j;
-
-
-                    }
-                }
-            }
-             */
+            System.out.print("\n\n-------------------------------------------------------------\n");
 
 
 
-
-
+            // NEXT STEP: FIND A WAY HOW TO TRACK THE SIDE LENGTH OF THE SUB ARRAYS.
 
 
 
