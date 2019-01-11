@@ -3,39 +3,39 @@ package com.company;
 
 import java.util.*;
 import java.io.*;
-public class Main {
 
+public class Main {
 
     // maximum numbers stored in the array
     private static final int MAX= 500;
     private static final int INVALID = -100;
 
 
-    // this function compares the numbers stored in a 2d array and returns the
-    // the absolute value closest to zero
+// this function compares the numbers stored in a 2d array and returns the
+// the absolute value closest to zero
 
-    /*
-    public static int getClosestValue(int[][] numbers) {
+/*
+public static int getClosestValue(int[][] numbers) {
 
-        // creates a new int variable minValue with the value of the
-        // initial value of the array
-        int minValue = Math.abs(numbers[0][0]);
+    // creates a new int variable minValue with the value of the
+    // initial value of the array
+    int minValue = Math.abs(numbers[0][0]);
 
-        // loops over all indexes in the int array
-        for (int j = 0; j < numbers.length; j++) {
+    // loops over all indexes in the int array
+    for (int j = 0; j < numbers.length; j++) {
 
-            for (int i = 0; i < numbers[j].length; i++) {
+        for (int i = 0; i < numbers[j].length; i++) {
 
-                // if the absolute value stored is less than the current minValue
-                // then that becomes the new minValue
-                if ( Math.abs(numbers[j][i]) < minValue ) {
-                    minValue = numbers[j][i];
-                }
+            // if the absolute value stored is less than the current minValue
+            // then that becomes the new minValue
+            if ( Math.abs(numbers[j][i]) < minValue ) {
+                minValue = numbers[j][i];
             }
         }
-        return minValue ;
     }
-     */
+    return minValue ;
+}
+ */
 
     public static int getClosestValue(int[] numbers) {
 
@@ -46,10 +46,10 @@ public class Main {
         // loops over all indexes in the int array
         for (int i = 0; i < numbers.length; i++) {
 
-                if ( Math.abs(numbers[i]) < minValue ) {
-                    minValue = numbers[i];
-                }
+            if ( Math.abs(numbers[i]) < minValue ) {
+                minValue = numbers[i];
             }
+        }
 
         return minValue ;
     }
@@ -71,7 +71,6 @@ public class Main {
 
         //DECLARE/ INITIALIZE VARIABLES
         String userFileName;
-        int someInteger = 0;
         int arr_[][] = null;
         boolean exit = false;
 
@@ -166,11 +165,16 @@ public class Main {
                 for (int i = 0; i< n; i++) {
 
                     for (int j= 0; j < n; j++) {
+
                         itemsOnLine++;
-                        // System.out.print ("i:" + i + " j:" + j + " " + arr_[i][j]);
+
+
                         System.out.print(arr_[i][j] + " ");
+
                         if (itemsOnLine==n){
+
                             System.out.println();
+
                             itemsOnLine =0;
                         }
                     }
@@ -186,7 +190,9 @@ public class Main {
                 //
 
             } catch (FileNotFoundException e) {
+
                 System.out.println(e);
+
                 e.printStackTrace();
             }
 
@@ -200,12 +206,15 @@ public class Main {
 
             // creates a new 2d array which will store the sums of the various subarrays
 
-          //  int arr_sum [][]= new int [n-1][n-1];
+            //  int arr_sum [][]= new int [n-1][n-1];
             int arr_sum [][]= new int [MAX][4];
 
             for (int i= 0; i < MAX; i++){
+
                 for (int j=0; j< 4; j++){
+
                     arr_sum[i][j] = INVALID;
+
                 }
             }
 
@@ -213,7 +222,7 @@ public class Main {
             // where the side length has to be less than the dimensions of the original matrix 'n'
             // and no less than 2 so that individual elements are not considered
 
-            for (int i=0; i < MAX; i ++){
+            for (int i = 0; i < MAX; i ++){
 
                 for (int side = n-1; side >= 2; side --) {
 
@@ -242,6 +251,7 @@ public class Main {
                             // stores the sum of the sub-array in the same position of the subarray
                             // in the original matrix
                             //arr_sum[r][c] = sum;
+
                             arr_sum[i][0]= side;
                             arr_sum [i][1] = r;
                             arr_sum [i][2] = c;
@@ -262,7 +272,7 @@ public class Main {
                 if (arr_sum[i][3]!= INVALID) {
 
                     temp_array[i] = arr_sum[i][3];
-
+                    //System.out.println("i" + i + " " +  temp_array[i]);
 
                 }
             }
@@ -326,7 +336,7 @@ public class Main {
             if(userIn.equalsIgnoreCase("exit") ) {
 
                 System.out.println("\n\n Process Complete");
-                 exit = true;
+                exit = true;
 
             }
 
@@ -344,4 +354,4 @@ public class Main {
 
 
     }// end main method
-        }// end main class
+}// end main class
